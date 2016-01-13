@@ -1,0 +1,59 @@
+
+
+<div class="row">
+  <div class="col-md-9">
+    <%= image_tag(@idea.picture_url, width: '75%',:class => "style_image") if @idea.picture.present? %>
+  </div>
+
+  <div class="col-md-3">
+    <p><b>My Idea is to </b><%= @idea.name %></p>
+    <p><b>I mean..: </b><%= @idea.description %></p>
+    <p>
+
+      <strong>User Details:</strong>
+      <%= @idea.user.id %>|
+      <%= @idea.user.email %>
+
+      <%= link_to 'Change My Idea', edit_idea_path(@idea) %> |
+      <%= link_to 'Delete', @idea, data: { confirm: 'Are you sure?' }, method: :delete %> |
+      <%= link_to 'Show my Ideas', ideas_path %>
+    </p>
+  </div>
+</div>
+<br>
+<br>
+<h2>The old way:</h2>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @idea.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @idea.description %>
+</p>
+<p>
+  <strong>Name:</strong>
+  <%= @idea.user.id %>
+  <%= @idea.user.email %>
+</p>
+
+<p>
+  <strong>Picture:</strong>
+  <%= image_tag(@idea.picture_url, :width => 600) if @idea.picture.present? %>
+<h3>Comments</h3>
+<% @comments.each do |comment| %>
+    <div>
+      <strong><%= comment.user_name %></strong>
+      <br />
+      <p><%= comment.body %></p>
+      <p><%= link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    </div>
+<% end %>
+<%= render 'comments/form' %>
+</p>
+
+<%= link_to 'Edit', edit_idea_path(@idea) %> |
+<%= link_to 'Back', ideas_path %>
